@@ -5,5 +5,29 @@
 
 body{
   font-family: 'Open Sans', sans-serif;
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows:repeat(5,1fr);
+  grid-template-areas:
+  "aside top top top"
+  "aside top top top"
+  "aside bottom bottom bottom"
+  "aside bottom bottom bottom"
+  "aside bottom bottom bottom";
+  height:100vh;
+}
 
+/** top **/
+.top__section{
+  grid-area:top;
+}
+
+/** bottom **/
+.card__section--bottom{
+  grid-area:bottom;
+}
+
+/** aside **/
+.aside__section--left {
+  grid-area:aside; 
 }
