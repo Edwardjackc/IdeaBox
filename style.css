@@ -5,29 +5,59 @@
 
 body{
   font-family: 'Open Sans', sans-serif;
-  display:grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows:repeat(5,1fr);
-  grid-template-areas:
-  "aside top top top"
-  "aside top top top"
-  "aside bottom bottom bottom"
-  "aside bottom bottom bottom"
-  "aside bottom bottom bottom";
   height:100vh;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+  "aside top top"
+  "aside top top"
+  "aside top top"
+  "aside bottom bottom";
 }
 
 /** top **/
-.top__section{
-  grid-area:top;
+.top__section {
+
+  background:#A9AAD2;
+  display:flex;
+  justify-content: center;
+  padding:20px;
+}
+
+.top__form {
+  width:60%;
+  height:90%;
+  display:flex;
+  justify-content: space-around;
+}
+
+.top__labels {
+  display:block;
+  color:#6e646b;
+}
+
+.top__input {
+  border:#1f1f3d 1px solid;
+  padding:20px;
+  width:100%
+}
+
+.top__input--save {
+  background:#1f1f3d;
+  color:#ffffff;
+  padding:5px;
+  height:30px;
 }
 
 /** bottom **/
-.card__section--bottom{
+.bottom__section {
   grid-area:bottom;
+  background:#eaeaf4;
+  height:100%;
 }
 
 /** aside **/
-.aside__section--left {
-  grid-area:aside; 
+.aside__section {
+  grid-area:aside;
+  background:#eaeaf4;
 }
