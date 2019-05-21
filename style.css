@@ -7,17 +7,21 @@ body{
   font-family: 'Open Sans', sans-serif;
   height:100vh;
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 30% 70%;
+  grid-template-rows:40% 60%;
+  place-content:stretch;
   grid-template-areas:
-  "aside top top"
-  "aside top top"
-  "aside top top"
-  "aside bottom bottom";
+  "aside top"
+  "aside bottom"
 }
 
 /** top **/
-.top__section {
+main { 
+  height:100%;
+}
 
+.top__section {
+  grid-area: top;
   background:#A9AAD2;
   display:flex;
   justify-content: center;
@@ -49,11 +53,10 @@ body{
   height:30px;
 }
 
-/** bottom **/
+/********* bottom *************/
 .bottom__section {
   grid-area:bottom;
   background:#eaeaf4;
-  height:100%;
 }
 
 /** aside **/
