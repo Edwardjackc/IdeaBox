@@ -82,6 +82,10 @@ h1 {
   padding:5px;
 }
 
+ul{
+  margin-left:-2.5rem;
+}
+
 .aside__container {
   grid-area:aside;
   background:#1f1f3d;
@@ -90,7 +94,7 @@ h1 {
 .aside__headers {
   color: #e9e9e9;
   font-size:.8em;
-  font: weight 400;
+  font:300;
 }
 
 .aside__section { 
@@ -107,6 +111,7 @@ h1 {
 
 .aside__section--bottom {
   border-bottom:1px solid #e9e9f3;
+  height:280px;
 }
 
 .aside__input {
@@ -130,6 +135,12 @@ h1 {
   flex-direction: column;
   align-items: flex-start;
   width:100%;
-  font-size:1em;
+  font-size:1.1em;
   font-weight:300;
+}
+
+.aside__form { 
+  display:flex;
+  flex-direction: column;
+  margin:5px 0px;
 }
