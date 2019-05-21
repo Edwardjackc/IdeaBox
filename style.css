@@ -39,8 +39,7 @@ body{
 }
 
 .top__labels {
-  display:block;
-  color:#6e646b;
+  font-size:.8em;
 }
 
 .top__input {
@@ -82,9 +81,13 @@ h1 {
   padding:5px;
 }
 
-ul{
+ul {
   margin-left:-2.5rem;
 }
+
+/* ul:hover {
+  background-color:#f58e72;
+} */
 
 .aside__container {
   grid-area:aside;
@@ -100,18 +103,20 @@ ul{
 .aside__section { 
   display:flex;
   flex-direction: column;
-  padding:5px;
+  padding:15px;
 }
 
 .aside__section--top { 
-  border-top:1px solid #e9e9f3;
-  border-bottom:1px solid #e9e9f3;
-  height:100px;
+  border-top:1px solid #a9aad2;
+  border-bottom:1px solid #A9aad2;
+  height:150px;
+  justify-content: space-evenly;
 }
 
 .aside__section--bottom {
-  border-bottom:1px solid #e9e9f3;
-  height:280px;
+  border-bottom:1px solid #A9aad2;
+  height:325px;
+  justify-content: space-evenly
 }
 
 .aside__input {
@@ -126,6 +131,7 @@ ul{
 
 .aside__input--text {
   background-color:#ffffff;
+  margin-bottom:20px;
 }
 
 .aside__list {  
@@ -137,6 +143,23 @@ ul{
   width:100%;
   font-size:1.1em;
   font-weight:300;
+  margin-bottom:10px;
+}
+
+/* .aside__ul--list:hover { 
+  background-color:#f58e72;
+} */
+
+.aside__list--swill:hover{
+  background-color:#d14119;
+}
+
+.aside__list--plausible:hover{
+  background-color:#d14119;
+}
+
+.aside__list--genius:hover{
+  background-color:#d14119;
 }
 
 .aside__form { 
