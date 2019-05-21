@@ -67,7 +67,7 @@ body{
 }
 
 /********* bottom *************/
-.bottom__section {
+.bottom__container {
   height:60%;
   grid-area:bottom;
   background:#eaeaf4;
