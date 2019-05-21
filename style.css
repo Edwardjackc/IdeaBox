@@ -17,7 +17,7 @@ body{
 
 /** top **/
 main { 
-  height:100%;
+  height:100vh;
 }
 
 .top__section {
@@ -26,13 +26,16 @@ main {
   display:flex;
   justify-content: center;
   padding:20px;
+  height: 40%;
 }
 
 .top__form {
   width:60%;
-  height:90%;
+  /* height:90%; */
+  height: 100%;
   display:flex;
   justify-content: space-around;
+  flex-direction: column;
 }
 
 .top__labels {
@@ -42,21 +45,29 @@ main {
 
 .top__input {
   border:#1f1f3d 1px solid;
-  padding:20px;
-  width:100%
+  padding:5px;
+  width:100%;
+  height:40px;
 }
 
 .top__input--save {
   background:#1f1f3d;
   color:#ffffff;
   padding:5px;
-  height:30px;
+  height:40px;
+}
+
+.top__input--search {
+  height:40px;
+  padding:5px;
 }
 
 /********* bottom *************/
 .bottom__section {
+  height:60%;
   grid-area:bottom;
   background:#eaeaf4;
+  border: 4px solid blue;
 }
 
 /** aside **/
