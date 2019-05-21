@@ -7,28 +7,35 @@ body{
   font-family: 'Open Sans', sans-serif;
   height:100vh;
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 30% 70%;
+  grid-template-rows:40% 60%;
+  place-content:stretch;
   grid-template-areas:
-  "aside top top"
-  "aside top top"
-  "aside top top"
-  "aside bottom bottom";
+  "aside top"
+  "aside bottom"
 }
 
 /** top **/
-.top__section {
+main { 
+  height:100vh;
+}
 
+.top__section {
+  grid-area: top;
   background:#A9AAD2;
   display:flex;
   justify-content: center;
   padding:20px;
+  height: 40%;
 }
 
 .top__form {
   width:60%;
-  height:90%;
+  /* height:90%; */
+  height: 100%;
   display:flex;
   justify-content: space-around;
+  flex-direction: column;
 }
 
 .top__labels {
@@ -38,22 +45,29 @@ body{
 
 .top__input {
   border:#1f1f3d 1px solid;
-  padding:20px;
-  width:100%
+  padding:5px;
+  width:100%;
+  height:40px;
 }
 
 .top__input--save {
   background:#1f1f3d;
   color:#ffffff;
   padding:5px;
-  height:30px;
+  height:40px;
 }
 
-/** bottom **/
+.top__input--search {
+  height:40px;
+  padding:5px;
+}
+
+/********* bottom *************/
 .bottom__section {
+  height:60%;
   grid-area:bottom;
   background:#eaeaf4;
-  height:100%;
+  border: 4px solid blue;
 }
 
 /** aside **/
