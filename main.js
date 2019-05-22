@@ -6,7 +6,8 @@ var topForm = document.querySelector('#top__form')
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
 saveBtn.addEventListener('click',generateCard);
-
+//Global var
+var globalArray = JSON.parse(localStorage.getItem('key')) || [];
 
 function validate() {
   validateInputs(saveBtn,titleInput.value)
