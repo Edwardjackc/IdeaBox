@@ -43,5 +43,18 @@ bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article
         <footer class="bottom__footer--card">
           <img class="bottom__icon--card" src="images/upvote.svg" class="bottom__img" id="bottom__img--upvote" alt="upvote__button--inactive"><span class="bottom__span--card">Quality:Swill</span><img class="bottom__icon--card" src="images/downvote.svg" id="bottom__img--downvote" alt="downvote__button--inactive">
         </footer>
-      </article>`
-)}
+      </article>`)
+      // debugger;
+      instantiateIdea();
+}
+
+function instantiateIdea() {
+  var idea = new Idea({
+    id: Date.now(),
+    title: titleInput.value,
+    body: bodyInput.value,
+    star: false,
+    quality: 0
+  })
+  console.log(idea);
+}
