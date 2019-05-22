@@ -6,9 +6,10 @@ var bottomContainer = document.querySelector('#bottom__container')
 //event listeners 
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
-saveBtn.addEventListener('click',generateCard);
+saveBtn.addEventListener('click', instantiateIdea);
+bottomContainer.addEventListener('click', deleteCard)
 //Global var
-var globalArray = JSON.parse(localStorage.getItem('key')) || [];
+var globalArray = JSON.parse(localStorage.getItem('idea')) || [];
 
 function validate() {
   validateInputs(saveBtn,titleInput.value)
@@ -25,27 +26,42 @@ function clearForm(form) {
 
 
 
+
+// DOM
+// grab the value of the input for title, grab the value of the input for body
+// function captureCard() {
+//   title = titleInput.value;
+//   body = bodyInput.value;
+//   generateCard(title, body);
+// }
+// insert text as an argument for the new card in whatever function
+// insert the article to the DOM as a new card 
+
+
+// Logic / Idea
+// instantiate new card object 
+// store new card object in local storage
+
+
 // function generateCard() {
 //   console.log('Hi');
 //   clearForm(topForm);
 //   validateInputs(saveBtn,titleInput.value)
 // }
 
-function generateCard () {
-bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article--card">
+function generateCard (idea) {
+bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article--card"data-id="${idea.id}">
   <header class="bottom__header--card">
-    <img class="bottom__icon--card" src="images/star.svg" alt="star__button--inactive"><img class="bottom__icon--card" src="images/delete.svg" alt="delete__button--inactive">
+    <img class="bottom__icon--card" src="images/star.svg" alt="star__button--inactive"><img class="bottom__icon--card bottom__btn--delete" src="images/delete.svg" alt="delete__button--inactive">
         </header>
       <section class="bottom__section--card">
-        <h3 class="bottom__title--card">Idea title</h3>
-        <p class="bottom__paragraph--card">They don’t want us to eat. To succeed you must believe. When you believe, you will succeed. 
+        <h3 class="bottom__title--card">${idea.title}</h3>
+        <p class="bottom__paragraph--card">${idea.body}</p>
         </section>
         <footer class="bottom__footer--card">
           <img class="bottom__icon--card" src="images/upvote.svg" class="bottom__img" id="bottom__img--upvote" alt="upvote__button--inactive"><span class="bottom__span--card">Quality:Swill</span><img class="bottom__icon--card" src="images/downvote.svg" id="bottom__img--downvote" alt="downvote__button--inactive">
         </footer>
       </article>`)
-      // debugger;
-      instantiateIdea();
 }
 
 function instantiateIdea() {
@@ -56,5 +72,12 @@ function instantiateIdea() {
     star: false,
     quality: 0
   })
+  generateCard(idea);
   console.log(idea);
+}
+
+function deleteCard(e) {
+  if(e.target.classList.contains('bottom__btn--delete')) {
+    e.target.closest('article').remove();
+  }
 }

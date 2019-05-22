@@ -72,6 +72,8 @@ body{
   grid-area:bottom;
   background:#eaeaf4;
   padding:25px 15px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .bottom__article--card { 

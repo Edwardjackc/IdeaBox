@@ -6,4 +6,16 @@ class Idea {
     this.star = obj.star;
     this.quality = obj.quality || 0;
   }
+  saveToStorage() {
+
+  }
+  deleteFromStoragte() {
+
+  }
+  updateIdea() {
+
+  }
+  updateQuality() {
+
+  }
 }
