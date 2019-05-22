@@ -89,8 +89,12 @@ body{
   background-color:#1f1f3d;
   display:flex;
   justify-content: space-between;
-  padding:5px;
   height:10%;
+}
+
+.bottom__icon--card {
+  height:35px;
+  width:35px;
 }
 
 .bottom__title--card {
@@ -113,8 +117,9 @@ body{
   border-bottom:solid 1px #5356a3;
   display:flex;
   justify-content: space-between;
-  padding:5px;
+  align-items: center;
   color:#ffffff;
+  font-weight:bold;
 }
 
 /** aside **/
