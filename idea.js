@@ -7,7 +7,7 @@ class Idea {
     this.quality = obj.quality || 0;
   }
 
-  saveToStorage() {
+  saveToStorage(globalArray) {
     var stringified = JSON.stringify(globalArray);
     localStorage.setItem('ideaArr', stringified);
   }

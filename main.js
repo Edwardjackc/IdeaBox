@@ -12,7 +12,8 @@ bottomContainer.addEventListener('click', deleteCard)
 this.addEventListener('load', pageReload);
 
 //Global var
-const globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
+let globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
+console.log('before', globalArray)
 
 function validate() {
   validateInputs(saveBtn,titleInput.value && bodyInput.value)
@@ -27,9 +28,9 @@ function clearForm(form) {
   form.reset()
 }
 
-function clearDisplayMessage() {
-  display__message.parentNode.removeChild(display__message);
-}
+// function clearDisplayMessage() {
+  // display__message.parentNode.removeChild(display__message);
+// }
 
 function generateCard (idea) {
 bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article--card"data-id="${idea.id}">
@@ -47,7 +48,7 @@ bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article
 }
 
 function instantiateIdea() {
-  clearDisplayMessage()
+  // clearDisplayMessage()
   var idea = new Idea({
     id: Date.now(),
     title: titleInput.value,
@@ -66,7 +67,10 @@ function instantiateIdea() {
 function deleteCard(e) {
   if(e.target.classList.contains('bottom__btn--delete')) {
     e.target.closest('article').remove();
-  }
+    var locatedIndex = locateIndex(e);
+    globalArray[locatedIndex].deleteFromStorage(locatedIndex);
+    // globalArray.idea.deleteFromStorage(locatedIndex);
+  } 
 }
 
 function locateIndex(e) {
@@ -75,12 +79,46 @@ function locateIndex(e) {
   var locatedIndex = globalArray.findIndex(function (idea) {
     return idea.id === parentId
   })
+  console.log(locatedIndex);
   return locatedIndex
 };
 
 function pageReload() {
   if (globalArray.length !== 0) {
-    globalArray.forEach(function (item) {
-      generateCard(item);
+    // debugger;
+    var newGlobalArray = globalArray.map(idea => {
+      return newIdea = new Idea ({
+        id: idea.id, 
+        title: idea.title, 
+        body: idea.body, 
+        star: idea.star,
+        quality: idea.quality
+        })
+    })
+    globalArray = newGlobalArray;
+    globalArray.forEach(function(idea) {
+      generateCard(idea)
+    })
+  }
+    console.log('after', globalArray);
+  };
+
+
+// function pageReload() {
+//   if (globalArray.length !== 0) {
+//     globalArray.forEach(reinstantiateIdea (item)); {
+//       debugger;
+//       generateCard(item);
+//     }
+//   }
+// }
+
+function reinstantiateIdea() {
+  var idea = new Idea ({
+  id: idea.id,
+  title: idea.title,
+  body: idea.body,
+  star: idea.star,
+  quality: idea.quality,
   })
-}}
+}
