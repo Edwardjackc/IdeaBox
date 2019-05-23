@@ -78,14 +78,14 @@ body{
 
 .display__message {
   align-items: center;
-  background-color: #1f1f3d;
-  border-radius: 50px;
+  background-color: #d14119;
+  border-radius: 20px;
   border-style: solid;
   color: #ffffff;
   display: flex;
   font-size: 1.3em;
   font-weight: 700;
-  height: 20%;
+  height: 15%;
   justify-content: center;
   margin: 0 auto;
   width: 55%;
