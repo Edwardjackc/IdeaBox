@@ -76,7 +76,7 @@ body{
   flex-wrap: wrap;
 }
 
-.display__message {
+.bottom__display--message {
   align-items: center;
   background-color: #1f1f3d;
   border-radius: 50px;
