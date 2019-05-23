@@ -7,13 +7,19 @@ class Idea {
     this.quality = obj.quality || 0;
   }
 
-  saveToStorage(globalArray) {
+  saveToStorage() {
     var stringified = JSON.stringify(globalArray);
     localStorage.setItem('ideaArr', stringified);
   }
 
-  deleteFromStorage(locatedIndex) {
-    localStorage.removeItem(locatedIndex)
+  deleteFromStorage(locatedId) {
+    var newGlobalArray = globalArray.filter(function(idea) {
+      return idea.id !== locatedId;
+  })
+  console.log(newGlobalArray);
+  globalArray = newGlobalArray;
+  var stringified = JSON.stringify(globalArray);
+  localStorage.setItem('ideaArr', stringified);
   }
 
   updateIdea() {

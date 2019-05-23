@@ -12,7 +12,7 @@ bottomContainer.addEventListener('click', deleteCard)
 this.addEventListener('load', pageReload);
 
 //Global var
-let globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
+var globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
 console.log('before', globalArray)
 
 function validate() {
@@ -68,9 +68,16 @@ function deleteCard(e) {
   if(e.target.classList.contains('bottom__btn--delete')) {
     e.target.closest('article').remove();
     var locatedIndex = locateIndex(e);
-    globalArray[locatedIndex].deleteFromStorage(locatedIndex);
-    // globalArray.idea.deleteFromStorage(locatedIndex);
+    var locatedId = locateId(e);
+    console.log(locatedId)
+    globalArray[locatedIndex].deleteFromStorage(locatedId);
   } 
+}
+
+function locateId(e) {
+  var parent = e.target.closest('article');
+  var parentId = parseInt(parent.dataset.id);
+  return(parentId)
 }
 
 function locateIndex(e) {
@@ -83,10 +90,27 @@ function locateIndex(e) {
   return locatedIndex
 };
 
+// function deleteCard(e) {
+//   if(e.target.classList.contains('bottom__btn--delete')) {
+//     e.target.closest('article').remove();
+//     var locatedIndex = locateIndex(e);
+//     globalArray[locatedIndex].deleteFromStorage(locatedIndex);
+//   } 
+// }
+
+// function locateIndex(e) {
+//   var parent = e.target.closest('article');
+//   var parentId = parseInt(parent.dataset.id);
+//   var locatedIndex = globalArray.findIndex(function (idea) {
+//     return idea.id === parentId
+//   })
+//   console.log(locatedIndex);
+//   return locatedIndex
+// };
+
 function pageReload() {
   if (globalArray.length !== 0) {
-    // debugger;
-    var newGlobalArray = globalArray.map(idea => {
+    var newGlobalArray = globalArray.map(function(idea) {
       return newIdea = new Idea ({
         id: idea.id, 
         title: idea.title, 
