@@ -3,26 +3,32 @@ var bodyInput = document.querySelector('#top__input--body');
 var saveBtn = document.querySelector('#top__input--save');
 var topForm = document.querySelector('#top__form')
 var bottomContainer = document.querySelector('#bottom__container')
+var display__message = document.querySelector('.display__message')
 //event listeners 
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
 saveBtn.addEventListener('click', instantiateIdea);
 bottomContainer.addEventListener('click', deleteCard)
 this.addEventListener('load', pageReload);
+
 //Global var
 const globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
 
 function validate() {
-  validateInputs(saveBtn,titleInput.value)
-  validateInputs(saveBtn,bodyInput.value)
+  validateInputs(saveBtn,titleInput.value && bodyInput.value)
+  // validateInputs(saveBtn,bodyInput.value)
 }
 
 function validateInputs(button,input) {
-  button.disabled = input.length > 0 ? false : true
+  button.disabled = !input //? false : true
 }
 
 function clearForm(form) {
   form.reset()
+}
+
+function clearDisplayMessage() {
+  display__message.parentNode.removeChild(display__message);
 }
 
 function generateCard (idea) {
@@ -41,6 +47,7 @@ bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article
 }
 
 function instantiateIdea() {
+  clearDisplayMessage()
   var idea = new Idea({
     id: Date.now(),
     title: titleInput.value,
@@ -53,6 +60,7 @@ function instantiateIdea() {
   idea.saveToStorage(globalArray)
   clearForm(topForm);
   validateInputs(saveBtn,bodyInput)
+  console.log(idea);
 }
 
 function deleteCard(e) {
@@ -69,8 +77,6 @@ function locateIndex(e) {
   })
   return locatedIndex
 };
-
-
 
 function pageReload() {
   if (globalArray.length !== 0) {
