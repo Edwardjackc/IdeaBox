@@ -3,7 +3,7 @@ var bodyInput = document.querySelector('#top__input--body');
 var saveBtn = document.querySelector('#top__input--save');
 var topForm = document.querySelector('#top__form')
 var bottomContainer = document.querySelector('#bottom__container')
-var display__message = document.querySelector('.display__message')
+var displayMessage = document.querySelector('#bottom__display--message')
 //event listeners 
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
@@ -30,6 +30,21 @@ function clearForm(form) {
 
 // function clearDisplayMessage() {
   // display__message.parentNode.removeChild(display__message);
+
+//   if (bottomContainer.innerHTML === "")
+//   displayMessage.parentNode.removeChild(bottom__display--message);
+// }
+
+// function clearDisplayMessage() {
+//   if (bottomContainer.classList.contains(bottom__article--card)) {
+//     removeChild(bottom__display--message)
+//     }
+//   }
+
+// function clearDisplayMessage() {
+//   debugger;
+//   if (bottomContainer.node.removeChild === "article")
+//     displayMessage.style.display= 'none'
 // }
 
 function generateCard (idea) {
@@ -57,6 +72,7 @@ function instantiateIdea() {
     quality: 0
   })
   generateCard(idea);
+  // clearDisplayMessage();
   globalArray.push(idea)
   idea.saveToStorage(globalArray)
   clearForm(topForm);
@@ -146,3 +162,44 @@ function reinstantiateIdea() {
   quality: idea.quality,
   })
 }
+    const newArray = globalArray.map(ideaObj => {
+      const newIdea = new Idea({...ideaObj});
+      generateCard(newIdea);
+      return newIdea;
+    });
+    globalArray = newArray;
+    console.log(newArray)
+
+function pageReload() {
+  if (globalArray.length !== 0) {
+    const newArray = globalArray.map(ideaObj => {
+      // const {
+      //   id,
+      //   title,
+      //   body,
+      //   star,
+      //   quality
+      // } = ideaObj;
+      // const newIdea = new Idea({
+      //   id,
+      //   title,
+      //   body,
+      //   star,
+      //   quality
+      // });
+      const newIdea = new Idea({ ...ideaObj });
+      // const newIdea = new Idea({
+      //   id: ideaObj.id,
+      //   title: ideaObj.title,
+      //   body: ideaObj.bodyInput,
+      //   star: ideaObj.star,
+      //   quality: ideaObj.quality
+      // });
+      // generateCard(newIdea);
+      return newIdea;
+    });
+    globalArray = newArray;
+    console.log(newArray)
+  }
+}
+

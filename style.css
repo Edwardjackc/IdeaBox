@@ -76,16 +76,15 @@ body{
   flex-wrap: wrap;
 }
 
-.display__message {
+.bottom__display--message {
   align-items: center;
-  background-color: #1f1f3d;
-  border-radius: 50px;
-  border-style: solid;
+  background-color: #d14119;
+  border-radius: 20px;
   color: #ffffff;
   display: flex;
   font-size: 1.3em;
   font-weight: 700;
-  height: 20%;
+  height: 15%;
   justify-content: center;
   margin: 0 auto;
   width: 55%;
