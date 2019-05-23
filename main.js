@@ -106,100 +106,14 @@ function locateIndex(e) {
   return locatedIndex
 };
 
-// function deleteCard(e) {
-//   if(e.target.classList.contains('bottom__btn--delete')) {
-//     e.target.closest('article').remove();
-//     var locatedIndex = locateIndex(e);
-//     globalArray[locatedIndex].deleteFromStorage(locatedIndex);
-//   } 
-// }
-
-// function locateIndex(e) {
-//   var parent = e.target.closest('article');
-//   var parentId = parseInt(parent.dataset.id);
-//   var locatedIndex = globalArray.findIndex(function (idea) {
-//     return idea.id === parentId
-//   })
-//   console.log(locatedIndex);
-//   return locatedIndex
-// };
-
 function pageReload() {
   if (globalArray.length !== 0) {
-    var newGlobalArray = globalArray.map(function(idea) {
-      return newIdea = new Idea ({
-        id: idea.id, 
-        title: idea.title, 
-        body: idea.body, 
-        star: idea.star,
-        quality: idea.quality
-        })
-    })
-    globalArray = newGlobalArray;
-    globalArray.forEach(function(idea) {
-      generateCard(idea)
-    })
-  }
-    console.log('after', globalArray);
-  };
-
-
-// function pageReload() {
-//   if (globalArray.length !== 0) {
-//     globalArray.forEach(reinstantiateIdea (item)); {
-//       debugger;
-//       generateCard(item);
-//     }
-//   }
-// }
-
-function reinstantiateIdea() {
-  var idea = new Idea ({
-  id: idea.id,
-  title: idea.title,
-  body: idea.body,
-  star: idea.star,
-  quality: idea.quality,
-  })
-}
     const newArray = globalArray.map(ideaObj => {
-      const newIdea = new Idea({...ideaObj});
+      const newIdea = new Idea({ ...ideaObj });
       generateCard(newIdea);
       return newIdea;
     });
     globalArray = newArray;
     console.log(newArray)
-
-function pageReload() {
-  if (globalArray.length !== 0) {
-    const newArray = globalArray.map(ideaObj => {
-      // const {
-      //   id,
-      //   title,
-      //   body,
-      //   star,
-      //   quality
-      // } = ideaObj;
-      // const newIdea = new Idea({
-      //   id,
-      //   title,
-      //   body,
-      //   star,
-      //   quality
-      // });
-      const newIdea = new Idea({ ...ideaObj });
-      // const newIdea = new Idea({
-      //   id: ideaObj.id,
-      //   title: ideaObj.title,
-      //   body: ideaObj.bodyInput,
-      //   star: ideaObj.star,
-      //   quality: ideaObj.quality
-      // });
-      // generateCard(newIdea);
-      return newIdea;
-    });
-    globalArray = newArray;
-    console.log(newArray)
   }
 }
-
