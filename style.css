@@ -158,14 +158,14 @@ ul {
 }
 
 .aside__section--top { 
-  border-top:1px solid #a9aad2;
-  border-bottom:1px solid #A9aad2;
+  border-top:1px solid #353567;
+  border-bottom:1px solid #353567;
   height:150px;
   justify-content: space-evenly;
 }
 
 .aside__section--bottom {
-  border-bottom:1px solid #A9aad2;
+  border-bottom:1px solid #353567;
   height:325px;
   justify-content: space-evenly
 }

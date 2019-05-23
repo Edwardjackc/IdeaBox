@@ -71,6 +71,7 @@ function locateIndex(e) {
 };
 
 
+
 function pageReload() {
   if (globalArray.length !== 0) {
     globalArray.forEach(function (item) {
