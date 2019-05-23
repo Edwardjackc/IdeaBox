@@ -13,6 +13,7 @@ this.addEventListener('load', pageReload);
 
 //Global var
 var globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
+console.log('before', globalArray)
 
 function validate() {
   validateInputs(saveBtn,titleInput.value && bodyInput.value)
@@ -28,6 +29,8 @@ function clearForm(form) {
 }
 
 // function clearDisplayMessage() {
+  // display__message.parentNode.removeChild(display__message);
+
 //   if (bottomContainer.innerHTML === "")
 //   displayMessage.parentNode.removeChild(bottom__display--message);
 // }
@@ -60,7 +63,8 @@ bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article
 }
 
 function instantiateIdea() {
-  const idea = new Idea({
+  // clearDisplayMessage()
+  var idea = new Idea({
     id: Date.now(),
     title: titleInput.value,
     body: bodyInput.value,
@@ -79,7 +83,17 @@ function instantiateIdea() {
 function deleteCard(e) {
   if(e.target.classList.contains('bottom__btn--delete')) {
     e.target.closest('article').remove();
-  }
+    var locatedIndex = locateIndex(e);
+    var locatedId = locateId(e);
+    console.log(locatedId)
+    globalArray[locatedIndex].deleteFromStorage(locatedId);
+  } 
+}
+
+function locateId(e) {
+  var parent = e.target.closest('article');
+  var parentId = parseInt(parent.dataset.id);
+  return(parentId)
 }
 
 function locateIndex(e) {
@@ -88,11 +102,66 @@ function locateIndex(e) {
   var locatedIndex = globalArray.findIndex(function (idea) {
     return idea.id === parentId
   })
+  console.log(locatedIndex);
   return locatedIndex
 };
 
+// function deleteCard(e) {
+//   if(e.target.classList.contains('bottom__btn--delete')) {
+//     e.target.closest('article').remove();
+//     var locatedIndex = locateIndex(e);
+//     globalArray[locatedIndex].deleteFromStorage(locatedIndex);
+//   } 
+// }
+
+// function locateIndex(e) {
+//   var parent = e.target.closest('article');
+//   var parentId = parseInt(parent.dataset.id);
+//   var locatedIndex = globalArray.findIndex(function (idea) {
+//     return idea.id === parentId
+//   })
+//   console.log(locatedIndex);
+//   return locatedIndex
+// };
+
 function pageReload() {
   if (globalArray.length !== 0) {
+    var newGlobalArray = globalArray.map(function(idea) {
+      return newIdea = new Idea ({
+        id: idea.id, 
+        title: idea.title, 
+        body: idea.body, 
+        star: idea.star,
+        quality: idea.quality
+        })
+    })
+    globalArray = newGlobalArray;
+    globalArray.forEach(function(idea) {
+      generateCard(idea)
+    })
+  }
+    console.log('after', globalArray);
+  };
+
+
+// function pageReload() {
+//   if (globalArray.length !== 0) {
+//     globalArray.forEach(reinstantiateIdea (item)); {
+//       debugger;
+//       generateCard(item);
+//     }
+//   }
+// }
+
+function reinstantiateIdea() {
+  var idea = new Idea ({
+  id: idea.id,
+  title: idea.title,
+  body: idea.body,
+  star: idea.star,
+  quality: idea.quality,
+  })
+}
     const newArray = globalArray.map(ideaObj => {
       const newIdea = new Idea({...ideaObj});
       generateCard(newIdea);
@@ -100,16 +169,6 @@ function pageReload() {
     });
     globalArray = newArray;
     console.log(newArray)
-  }
-}
-
-
-
-
-
-
-
-
 
 function pageReload() {
   if (globalArray.length !== 0) {
@@ -136,10 +195,11 @@ function pageReload() {
       //   star: ideaObj.star,
       //   quality: ideaObj.quality
       // });
-      generateCard(newIdea);
+      // generateCard(newIdea);
       return newIdea;
     });
     globalArray = newArray;
     console.log(newArray)
   }
 }
+
