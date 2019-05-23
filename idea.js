@@ -6,15 +6,20 @@ class Idea {
     this.star = obj.star;
     this.quality = obj.quality || 0;
   }
+
   saveToStorage() {
-
+    var stringified = JSON.stringify(globalArray);
+    localStorage.setItem('ideaArr', stringified);
   }
-  deleteFromStoragte() {
 
+  deleteFromStorage(locatedIndex) {
+    localStorage.removeItem(locatedIndex)
   }
+
   updateIdea() {
 
   }
+  
   updateQuality() {
 
   }

@@ -8,9 +8,11 @@ var display__message = document.querySelector('.display__message')
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
 saveBtn.addEventListener('click', instantiateIdea);
-bottomContainer.addEventListener('click', deleteCard);
+bottomContainer.addEventListener('click', deleteCard)
+this.addEventListener('load', pageReload);
+
 //Global var
-var globalArray = JSON.parse(localStorage.getItem('idea')) || [];
+const globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
 
 function validate() {
   validateInputs(saveBtn,titleInput.value && bodyInput.value)
@@ -28,29 +30,6 @@ function clearForm(form) {
 function clearDisplayMessage() {
   display__message.parentNode.removeChild(display__message);
 }
-
-
-// DOM
-// grab the value of the input for title, grab the value of the input for body
-// function captureCard() {
-//   title = titleInput.value;
-//   body = bodyInput.value;
-//   generateCard(title, body);
-// }
-// insert text as an argument for the new card in whatever function
-// insert the article to the DOM as a new card 
-
-
-// Logic / Idea
-// instantiate new card object 
-// store new card object in local storage
-
-
-// function generateCard() {
-//   console.log('Hi');
-//   clearForm(topForm);
-//   validateInputs(saveBtn,titleInput.value)
-// }
 
 function generateCard (idea) {
 bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article--card"data-id="${idea.id}">
@@ -77,7 +56,10 @@ function instantiateIdea() {
     quality: 0
   })
   generateCard(idea);
+  globalArray.push(idea)
+  idea.saveToStorage(globalArray)
   clearForm(topForm);
+  validateInputs(saveBtn,bodyInput)
   console.log(idea);
 }
 
@@ -86,3 +68,19 @@ function deleteCard(e) {
     e.target.closest('article').remove();
   }
 }
+
+function locateIndex(e) {
+  var parent = e.target.closest('article');
+  var parentId = parseInt(parent.dataset.id);
+  var locatedIndex = globalArray.findIndex(function (idea) {
+    return idea.id === parentId
+  })
+  return locatedIndex
+};
+
+function pageReload() {
+  if (globalArray.length !== 0) {
+    globalArray.forEach(function (item) {
+      generateCard(item);
+  })
+}}
