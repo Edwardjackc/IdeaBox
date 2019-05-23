@@ -77,6 +77,7 @@ function instantiateIdea() {
     quality: 0
   })
   generateCard(idea);
+  clearForm(topForm);
   console.log(idea);
 }
 

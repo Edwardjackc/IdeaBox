@@ -76,6 +76,21 @@ body{
   flex-wrap: wrap;
 }
 
+.display__message {
+  align-items: center;
+  background-color: #1f1f3d;
+  border-radius: 50px;
+  border-style: solid;
+  color: #ffffff;
+  display: flex;
+  font-size: 1.3em;
+  font-weight: 700;
+  height: 20%;
+  justify-content: center;
+  margin: 0 auto;
+  width: 55%;
+}
+
 .bottom__article--card { 
   width:30%;
   height:350px;
