@@ -28,24 +28,13 @@ function clearForm(form) {
   form.reset()
 }
 
-// function clearDisplayMessage() {
-  // display__message.parentNode.removeChild(display__message);
 
-//   if (bottomContainer.innerHTML === "")
-//   displayMessage.parentNode.removeChild(bottom__display--message);
-// }
-
-// function clearDisplayMessage() {
-//   if (bottomContainer.classList.contains(bottom__article--card)) {
-//     removeChild(bottom__display--message)
-//     }
-//   }
-
-// function clearDisplayMessage() {
-//   debugger;
-//   if (bottomContainer.node.removeChild === "article")
-//     displayMessage.style.display= 'none'
-// }
+  function clearDisplayMessage() {
+    var bottomDisplay = document.querySelector('.bottom__display--message')
+    if(bottomContainer.contains(bottomDisplay)) {
+      bottomContainer.removeChild(bottomDisplay);
+    }
+  }
 
 function generateCard (idea) {
 bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article--card"data-id="${idea.id}">
@@ -63,7 +52,6 @@ bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article
 }
 
 function instantiateIdea() {
-  // clearDisplayMessage()
   var idea = new Idea({
     id: Date.now(),
     title: titleInput.value,
@@ -72,7 +60,7 @@ function instantiateIdea() {
     quality: 0
   })
   generateCard(idea);
-  // clearDisplayMessage();
+  clearDisplayMessage();
   globalArray.push(idea)
   idea.saveToStorage(globalArray)
   clearForm(topForm);
@@ -109,11 +97,12 @@ function locateIndex(e) {
 function pageReload() {
   if (globalArray.length !== 0) {
     const newArray = globalArray.map(ideaObj => {
-      const newIdea = new Idea({ ...ideaObj });
+    const newIdea = new Idea({ ...ideaObj});
       generateCard(newIdea);
       return newIdea;
     });
     globalArray = newArray;
     console.log(newArray)
+    clearDisplayMessage();
   }
 }
