@@ -44,8 +44,8 @@ function generateCard (idea) {
       <img class="bottom__icon--card bottom__btn--star" src=${starSrc} alt="star__button--inactive"><img class="bottom__icon--card bottom__btn--delete" src="images/delete.svg" alt="delete__button--inactive">
         </header>
       <section class="bottom__section--card">
-        <h3 class="bottom__title--card">${idea.title}</h3>
-        <p class="bottom__paragraph--card">${idea.body}</p>
+        <h3 class="bottom__title--card" contenteditable="true">${idea.title}</h3>
+        <p class="bottom__paragraph--card"contenteditable="true">${idea.body}</p>
         </section>
         <footer class="bottom__footer--card">
           <img class="bottom__icon--card" src="images/upvote.svg" class="bottom__img" id="bottom__img--upvote" alt="upvote__button--inactive"><span class="bottom__span--card">Quality:Swill</span><img class="bottom__icon--card" src="images/downvote.svg" id="bottom__img--downvote" alt="downvote__button--inactive">

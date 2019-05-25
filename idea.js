@@ -23,7 +23,7 @@ class Idea {
   }
 
   updateIdea(locatedIndex) {
-  globalArray[locatedIndex].star = !this.star;
+  globalArray[locatedIndex].star = !t his.star;
   var stringified = JSON.stringify(globalArray);
   localStorage.setItem('ideaArr', stringified);
   }
