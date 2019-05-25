@@ -4,7 +4,7 @@ var saveBtn = document.querySelector('#top__input--save');
 var topForm = document.querySelector('#top__form')
 var bottomContainer = document.querySelector('#bottom__container')
 var displayMessage = document.querySelector('#bottom__display--message')
-//event listeners 
+//event listeners
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
 saveBtn.addEventListener('click', instantiateIdea);
@@ -29,7 +29,6 @@ function clearForm(form) {
   form.reset();
 }
 
-
   function clearDisplayMessage() {
     var bottomDisplay = document.querySelector('.bottom__display--message')
     if(bottomContainer.contains(bottomDisplay)) {
@@ -51,7 +50,6 @@ function generateCard (idea) {
           <img class="bottom__icon--card" src="images/upvote.svg" class="bottom__img" id="bottom__img--upvote" alt="upvote__button--inactive"><span class="bottom__span--card">Quality:Swill</span><img class="bottom__icon--card" src="images/downvote.svg" id="bottom__img--downvote" alt="downvote__button--inactive">
         </footer>
       </article>`)
-
 }
 
 function instantiateIdea() {
@@ -81,19 +79,17 @@ function deleteCard(e) {
   } 
 }
 
-
 function starCard(e) {
   if(e.target.classList.contains('bottom__btn--star')) {
     var star = e.target;
     var locatedIndex = locateIndex(e);
-    var locatedId = locateId(e);
+    // var locatedId = locateId(e);
     globalArray[locatedIndex].updateIdea(locatedIndex);
-    updateStarCard(locatedIndex, locatedId, star);
+    updateStarCard(locatedIndex, star);
   }
-
 }
-function updateStarCard(locatedIndex, locatedId, star) {
-  console.log('this is the ' + locatedId)
+
+function updateStarCard(locatedIndex, star) {
   if(globalArray[locatedIndex].star === true) {
   star.setAttribute('src', 'images/star-active.svg')
   } else if(globalArray[locatedIndex].star === false) {
