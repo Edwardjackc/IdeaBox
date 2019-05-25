@@ -8,7 +8,8 @@ var displayMessage = document.querySelector('#bottom__display--message')
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
 saveBtn.addEventListener('click', instantiateIdea);
-bottomContainer.addEventListener('click', deleteCard)
+bottomContainer.addEventListener('click', deleteCard);
+bottomContainer.addEventListener('click', starCard);
 this.addEventListener('load', pageReload);
 
 //Global var
@@ -25,7 +26,7 @@ function validateInputs(button,input) {
 }
 
 function clearForm(form) {
-  form.reset()
+  form.reset();
 }
 
 
@@ -37,9 +38,10 @@ function clearForm(form) {
   }
 
 function generateCard (idea) {
-bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article--card"data-id="${idea.id}">
-  <header class="bottom__header--card">
-    <img class="bottom__icon--card" src="images/star.svg" alt="star__button--inactive"><img class="bottom__icon--card bottom__btn--delete" src="images/delete.svg" alt="delete__button--inactive">
+    var starSrc = idea.star ? "images/star-active.svg" : "images/star.svg";
+    bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article--card"data-id="${idea.id}">
+    <header class="bottom__header--card">
+      <img class="bottom__icon--card bottom__btn--star" src=${starSrc} alt="star__button--inactive"><img class="bottom__icon--card bottom__btn--delete" src="images/delete.svg" alt="delete__button--inactive">
         </header>
       <section class="bottom__section--card">
         <h3 class="bottom__title--card">${idea.title}</h3>
@@ -49,6 +51,7 @@ bottomContainer.insertAdjacentHTML('afterbegin',`<article class="bottom__article
           <img class="bottom__icon--card" src="images/upvote.svg" class="bottom__img" id="bottom__img--upvote" alt="upvote__button--inactive"><span class="bottom__span--card">Quality:Swill</span><img class="bottom__icon--card" src="images/downvote.svg" id="bottom__img--downvote" alt="downvote__button--inactive">
         </footer>
       </article>`)
+
 }
 
 function instantiateIdea() {
@@ -77,6 +80,26 @@ function deleteCard(e) {
     globalArray[locatedIndex].deleteFromStorage(locatedId);
   } 
 }
+
+
+function starCard(e) {
+  if(e.target.classList.contains('bottom__btn--star')) {
+    var star = e.target;
+    var locatedIndex = locateIndex(e);
+    var locatedId = locateId(e);
+    globalArray[locatedIndex].updateIdea(locatedIndex);
+    updateStarCard(locatedIndex, locatedId, star);
+  }
+
+}
+function updateStarCard(locatedIndex, locatedId, star) {
+  console.log('this is the ' + locatedId)
+  if(globalArray[locatedIndex].star === true) {
+  star.setAttribute('src', 'images/star-active.svg')
+  } else if(globalArray[locatedIndex].star === false) {
+  star.setAttribute('src', 'images/star.svg');
+  }
+  }
 
 function locateId(e) {
   var parent = e.target.closest('article');

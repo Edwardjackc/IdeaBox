@@ -22,9 +22,12 @@ class Idea {
   localStorage.setItem('ideaArr', stringified);
   }
 
-  updateIdea() {
-
+  updateIdea(locatedIndex) {
+  globalArray[locatedIndex].star = !this.star;
+  var stringified = JSON.stringify(globalArray);
+  localStorage.setItem('ideaArr', stringified);
   }
+
   
   updateQuality() {
 
