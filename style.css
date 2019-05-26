@@ -211,9 +211,9 @@ ul {
   margin-bottom:10px;
 }
 
-/* .aside__ul--list:hover { 
+/** .aside__ul--list:hover { 
   background-color:#f58e72;
-} */
+} **/
 
 .aside__list--swill:hover{
   background-color:#d14119;
