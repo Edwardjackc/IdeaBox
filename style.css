@@ -232,3 +232,46 @@ ul {
   flex-direction: column;
   margin:5px 0px;
 }
+
+@media (max-width: 450px) {
+
+body {
+  display: grid;
+  grid-template-rows: 0%;
+  grid-template-columns: 100%;
+  grid-template-areas: unset;
+}
+
+.top__form {
+  width: 100%;
+}
+
+.bottom__article--card {
+  margin: 10px 0;
+  width: 100%;
+  height: 250px;
+}
+
+.bottom__display--message {
+  font-size: .80em;
+}
+
+.bottom__header--card {
+  height: 15%;
+}
+
+.bottom__footer--card {
+  height: 15%;
+}
+.bottom__title--card {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.bottom__paragraph--card {
+  margin-top: 10px;
+}
+
+}
+
+
