@@ -4,7 +4,6 @@ var saveBtn = document.querySelector('#top__input--save');
 var topForm = document.querySelector('#top__form');
 var bottomContainer = document.querySelector('#bottom__container');
 var displayMessage = document.querySelector('#bottom__display--message');
-var cardBody = document.querySelector('.bottom__paragraph--card');
 //event listeners
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
@@ -96,7 +95,8 @@ function starCard(e) {
 
 function setText(e) {
   var locatedIndex = locateIndex(e);
-  if(e.target.classList.contains('bottom__paragraph--card')) {
+  if(e.target.classList.contains('bottom__title--card') ||
+     e.target.classList.contains('bottom__paragraph--card')) {
     var title = e.target.closest('article').querySelector('.bottom__title--card').textContent;
     var body = e.target.closest('article').querySelector('.bottom__paragraph--card').textContent;
     var star = globalArray[locatedIndex].star;
@@ -112,8 +112,7 @@ function returnHandler(e) {
   if (e.keyCode == 13) {
     e.target.blur();
   }
-}
-
+};
 
 function updateStarCard(locatedIndex, starImg) {
   if(globalArray[locatedIndex].star === true) {
@@ -149,5 +148,5 @@ function pageReload() {
     console.log(newArray)
     clearDisplayMessage();
   }
-}
+};
 
