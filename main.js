@@ -1,40 +1,43 @@
 var titleInput = document.querySelector('#top__input--title');
 var bodyInput = document.querySelector('#top__input--body');
 var saveBtn = document.querySelector('#top__input--save');
-var topForm = document.querySelector('#top__form')
-var bottomContainer = document.querySelector('#bottom__container')
-var displayMessage = document.querySelector('#bottom__display--message')
+var topForm = document.querySelector('#top__form');
+var bottomContainer = document.querySelector('#bottom__container');
+var displayMessage = document.querySelector('#bottom__display--message');
+var cardBody = document.querySelector('.bottom__paragraph--card');
 //event listeners
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
 saveBtn.addEventListener('click', instantiateIdea);
 bottomContainer.addEventListener('click', deleteCard);
 bottomContainer.addEventListener('click', starCard);
+bottomContainer.addEventListener('focusout', setText);
+bottomContainer.addEventListener('keyup', returnHandler);
 this.addEventListener('load', pageReload);
 
 //Global var
 var globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
-console.log('before', globalArray)
+console.log('before', globalArray);
 
 function validate() {
   validateInputs(saveBtn,titleInput.value && bodyInput.value)
   // validateInputs(saveBtn,bodyInput.value)
-}
+};
 
 function validateInputs(button,input) {
   button.disabled = !input //? false : true
-}
+};
 
 function clearForm(form) {
   form.reset();
-}
+};
 
   function clearDisplayMessage() {
     var bottomDisplay = document.querySelector('.bottom__display--message')
     if(bottomContainer.contains(bottomDisplay)) {
       bottomContainer.removeChild(bottomDisplay);
     }
-  }
+  };
 
 function generateCard (idea) {
     var starSrc = idea.star ? "images/star-active.svg" : "images/star.svg";
@@ -43,14 +46,14 @@ function generateCard (idea) {
       <img class="bottom__icon--card bottom__btn--star" src=${starSrc} alt="star__button--inactive"><img class="bottom__icon--card bottom__btn--delete" src="images/delete.svg" alt="delete__button--inactive">
         </header>
       <section class="bottom__section--card">
-        <h3 class="bottom__title--card">${idea.title}</h3>
-        <p class="bottom__paragraph--card">${idea.body}</p>
+        <h3 class="bottom__title--card" contenteditable="true">${idea.title}</h3>
+        <p class="bottom__paragraph--card" contenteditable="true">${idea.body}</p>
         </section>
         <footer class="bottom__footer--card">
           <img class="bottom__icon--card" src="images/upvote.svg" class="bottom__img" id="bottom__img--upvote" alt="upvote__button--inactive"><span class="bottom__span--card">Quality:Swill</span><img class="bottom__icon--card" src="images/downvote.svg" id="bottom__img--downvote" alt="downvote__button--inactive">
         </footer>
       </article>`)
-}
+};
 
 function instantiateIdea() {
   var idea = new Idea({
@@ -67,7 +70,7 @@ function instantiateIdea() {
   clearForm(topForm);
   validateInputs(saveBtn,bodyInput)
   console.log(idea);
-}
+};
 
 function deleteCard(e) {
   if(e.target.classList.contains('bottom__btn--delete')) {
@@ -77,31 +80,54 @@ function deleteCard(e) {
     console.log(locatedId)
     globalArray[locatedIndex].deleteFromStorage(locatedId);
   } 
-}
+};
 
 function starCard(e) {
+  var locatedIndex = locateIndex(e);
   if(e.target.classList.contains('bottom__btn--star')) {
-    var star = e.target;
-    var locatedIndex = locateIndex(e);
-    // var locatedId = locateId(e);
-    globalArray[locatedIndex].updateIdea(locatedIndex);
-    updateStarCard(locatedIndex, star);
+    var starImg = e.target;
+    var title = e.target.closest('article').querySelector('.bottom__title--card').textContent;
+    var body = e.target.closest('article').querySelector('.bottom__paragraph--card').textContent;
+    var star = !globalArray[locatedIndex].star;
+    globalArray[locatedIndex].updateIdea(title, body, star);
+    updateStarCard(locatedIndex, starImg);
+  }
+};
+
+function setText(e) {
+  var locatedIndex = locateIndex(e);
+  if(e.target.classList.contains('bottom__paragraph--card')) {
+    var title = e.target.closest('article').querySelector('.bottom__title--card').textContent;
+    var body = e.target.closest('article').querySelector('.bottom__paragraph--card').textContent;
+    var star = globalArray[locatedIndex].star;
+    updateCardInfo(title, body, star, locatedIndex);
+  }
+};
+
+function updateCardInfo(titleText, bodyText, star, locatedIndex) {
+globalArray[locatedIndex].updateIdea(titleText, bodyText, star);
+};
+
+function returnHandler(e) {
+  if (e.keyCode == 13) {
+    e.target.blur();
   }
 }
 
-function updateStarCard(locatedIndex, star) {
+
+function updateStarCard(locatedIndex, starImg) {
   if(globalArray[locatedIndex].star === true) {
-  star.setAttribute('src', 'images/star-active.svg')
+  starImg.setAttribute('src', 'images/star-active.svg')
   } else if(globalArray[locatedIndex].star === false) {
-  star.setAttribute('src', 'images/star.svg');
+  starImg.setAttribute('src', 'images/star.svg');
   }
-  }
+};
 
 function locateId(e) {
   var parent = e.target.closest('article');
   var parentId = parseInt(parent.dataset.id);
   return(parentId)
-}
+};
 
 function locateIndex(e) {
   var parent = e.target.closest('article');
@@ -109,8 +135,7 @@ function locateIndex(e) {
   var locatedIndex = globalArray.findIndex(function (idea) {
     return idea.id === parentId
   })
-  console.log(locatedIndex);
-  return locatedIndex
+  return locatedIndex;
 };
 
 function pageReload() {
@@ -125,3 +150,4 @@ function pageReload() {
     clearDisplayMessage();
   }
 }
+
