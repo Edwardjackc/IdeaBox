@@ -22,12 +22,13 @@ class Idea {
   localStorage.setItem('ideaArr', stringified);
   }
 
-  updateIdea(locatedIndex) {
-  globalArray[locatedIndex].star = !t his.star;
-  var stringified = JSON.stringify(globalArray);
-  localStorage.setItem('ideaArr', stringified);
-  }
-
+  updateIdea(title, body, star) {
+ this.title = title;
+ this.body = body;
+ this.star = star;
+ var stringified = JSON.stringify(globalArray);
+ localStorage.setItem('ideaArr', stringified);
+}
   
   updateQuality() {
 
