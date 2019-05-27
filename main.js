@@ -5,6 +5,7 @@ var topForm = document.querySelector('#top__form');
 var bottomContainer = document.querySelector('#bottom__container');
 var displayMessage = document.querySelector('#bottom__display--message');
 var searchInput = document.querySelector('.top__input--search');
+var asideList = document.querySelector('.aside__ul--list');
 //event listeners
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
@@ -16,6 +17,8 @@ bottomContainer.addEventListener('focusout', setText);
 bottomContainer.addEventListener('keyup', returnHandler);
 bottomContainer.addEventListener('click', upvoteQuality);
 bottomContainer.addEventListener('click', downvoteQuality);
+asideList.addEventListener('click', filterQualityHandler);
+
 this.addEventListener('load', pageReload);
 
 //Global var
@@ -151,7 +154,7 @@ function validateQuality(locatedIndex, qualityValue) {
     qualityValue = 0;
     globalArray[locatedIndex].updateQuality(qualityValue); 
   }
-  else if(qualityValue > globalArray[locatedIndex].qualityArray.length - 1) {
+  if(qualityValue > globalArray[locatedIndex].qualityArray.length - 1) {
     qualityValue = globalArray[locatedIndex].qualityArray.length - 1;
     globalArray[locatedIndex].updateQuality(qualityValue);
   } else {
@@ -163,7 +166,7 @@ function updateQualityCard(e, locatedIndex) {
   var qualityText = e.target.closest('article').querySelector('.bottom__span--card');
   var qualityIndex = globalArray[locatedIndex].quality
   var newText = globalArray[locatedIndex]['qualityArray'][(qualityIndex)]
- qualityText.innerHTML = `Quality: ${newText}`
+  qualityText.innerHTML = `Quality: ${newText}`
 
 };
 
@@ -178,7 +181,7 @@ function locateIndex(e) {
   var parentId = parseInt(parent.dataset.id);
   var locatedIndex = globalArray.findIndex(function (idea) {
     return idea.id === parentId
-  })
+  });
   return locatedIndex;
 };
 
@@ -192,7 +195,7 @@ function pageReload() {
     globalArray = newArray;
     console.log(newArray)
     clearDisplayMessage();
-  }
+  };
 };
 
 function searchIdeas() {
@@ -200,8 +203,30 @@ function searchIdeas() {
   bottomContainer.innerHTML = "";
   searchArray = globalArray.filter(function(idea){
       return idea.title.includes(search) || idea.body.includes(search)
-  })
+  });
   searchArray.map(function(idea){
     generateCard(idea)
-  })
+  });
+};
+
+function filterQualityHandler(e) {
+  if(e.target.classList.contains('aside__list--swill')) {
+    filterQuality(0);
+  };
+  if(e.target.classList.contains('aside__list--plausible')) {
+    filterQuality(1);
+  };
+  if(e.target.classList.contains('aside__list--genius')) {
+    filterQuality(2);
+  };
+};
+
+function filterQuality(qualityIndex) {
+  bottomContainer.innerHTML = "";
+  qualityArray = globalArray.filter(function(idea){
+    return idea.quality === (qualityIndex)
+  });
+  qualityArray.map(function(idea){
+  generateCard(idea)
+  });
 };
