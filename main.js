@@ -51,7 +51,7 @@ function generateCard (idea) {
         <p class="bottom__paragraph--card" contenteditable="true">${idea.body}</p>
         </section>
         <footer class="bottom__footer--card">
-          <img class="bottom__icon--card bottom__img--upvote" src="images/upvote.svg" class="bottom__img" id="bottom__img--upvote" alt="upvote__button--inactive"><span class="bottom__span--card">Quality:Swill</span><img class="bottom__icon--card bottom__img--downvote" src="images/downvote.svg" id="bottom__img--downvote" alt="downvote__button--inactive">
+          <img class="bottom__icon--card bottom__img--upvote" src="images/upvote.svg" class="bottom__img" id="bottom__img--upvote" alt="upvote__button--inactive"><span class="bottom__span--card">Quality: ${idea.qualityArray[idea.quality]}</span><img class="bottom__icon--card bottom__img--downvote" src="images/downvote.svg" id="bottom__img--downvote" alt="downvote__button--inactive">
         </footer>
       </article>`)
 };
@@ -130,6 +130,7 @@ function upvoteQuality(e) {
     qualityValue = globalArray[locatedIndex].quality;
     qualityValue++;
     validateQuality(locatedIndex, qualityValue);
+    updateQualityCard(e, locatedIndex);
   }
 };
 
@@ -139,13 +140,14 @@ function downvoteQuality(e) {
     qualityValue = globalArray[locatedIndex].quality;
     qualityValue--;
     validateQuality(locatedIndex, qualityValue);
+    updateQualityCard(e, locatedIndex);
   }
 };
 
 function validateQuality(locatedIndex, qualityValue) {
   if(qualityValue < 0) {
     qualityValue = 0;
-    globalArray[locatedIndex].updateQuality(qualityValue);
+    globalArray[locatedIndex].updateQuality(qualityValue); 
   }
   else if(qualityValue > globalArray[locatedIndex].qualityArray.length - 1) {
     qualityValue = globalArray[locatedIndex].qualityArray.length - 1;
@@ -154,7 +156,14 @@ function validateQuality(locatedIndex, qualityValue) {
     globalArray[locatedIndex].updateQuality(qualityValue);
   }
 }
- 
+
+function updateQualityCard(e, locatedIndex) {
+  var qualityText = e.target.closest('article').querySelector('.bottom__span--card');
+  var qualityIndex = globalArray[locatedIndex].quality
+  var newText = globalArray[locatedIndex]['qualityArray'][(qualityIndex)]
+ qualityText.innerHTML = `Quality: ${newText}`
+
+}
 
 function locateId(e) {
   var parent = e.target.closest('article');
