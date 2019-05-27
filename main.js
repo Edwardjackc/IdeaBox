@@ -181,7 +181,7 @@ function locateIndex(e) {
   var parentId = parseInt(parent.dataset.id);
   var locatedIndex = globalArray.findIndex(function (idea) {
     return idea.id === parentId
-  })
+  });
   return locatedIndex;
 };
 
@@ -195,7 +195,7 @@ function pageReload() {
     globalArray = newArray;
     console.log(newArray)
     clearDisplayMessage();
-  }
+  };
 };
 
 function searchIdeas() {
@@ -203,30 +203,30 @@ function searchIdeas() {
   bottomContainer.innerHTML = "";
   searchArray = globalArray.filter(function(idea){
       return idea.title.includes(search) || idea.body.includes(search)
-  })
+  });
   searchArray.map(function(idea){
     generateCard(idea)
-  })
+  });
 };
 
 function filterQualityHandler(e) {
   if(e.target.classList.contains('aside__list--swill')) {
     filterQuality(0);
-  }
+  };
   if(e.target.classList.contains('aside__list--plausible')) {
     filterQuality(1);
-  }
+  };
   if(e.target.classList.contains('aside__list--genius')) {
     filterQuality(2);
-  }
+  };
 };
 
 function filterQuality(qualityIndex) {
   bottomContainer.innerHTML = "";
   qualityArray = globalArray.filter(function(idea){
     return idea.quality === (qualityIndex)
-  })
+  });
   qualityArray.map(function(idea){
   generateCard(idea)
-  })
+  });
 };
