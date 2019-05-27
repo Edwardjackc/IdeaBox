@@ -5,6 +5,7 @@ class Idea {
     this.body = obj.body;
     this.star = obj.star;
     this.quality = obj.quality || 0;
+    this.qualityArray = ['Swill', 'Plausible', 'Genius']
   }
 
   saveToStorage() {
@@ -30,7 +31,9 @@ class Idea {
  localStorage.setItem('ideaArr', stringified);
 }
   
-  updateQuality() {
-
+  updateQuality(qualityValue) {
+ this.quality = qualityValue;
+ var stringified = JSON.stringify(globalArray);
+ localStorage.setItem('ideaArr', stringified);
   }
 }
