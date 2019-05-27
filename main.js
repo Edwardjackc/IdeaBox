@@ -4,10 +4,12 @@ var saveBtn = document.querySelector('#top__input--save');
 var topForm = document.querySelector('#top__form');
 var bottomContainer = document.querySelector('#bottom__container');
 var displayMessage = document.querySelector('#bottom__display--message');
+var searchInput = document.querySelector('.top__input--search');
 //event listeners
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
 saveBtn.addEventListener('click', instantiateIdea);
+searchInput.addEventListener('keyup', searchIdeas)
 bottomContainer.addEventListener('click', deleteCard);
 bottomContainer.addEventListener('click', starCard);
 bottomContainer.addEventListener('focusout', setText);
@@ -155,7 +157,7 @@ function validateQuality(locatedIndex, qualityValue) {
   } else {
     globalArray[locatedIndex].updateQuality(qualityValue);
   }
-}
+};
 
 function updateQualityCard(e, locatedIndex) {
   var qualityText = e.target.closest('article').querySelector('.bottom__span--card');
@@ -163,7 +165,7 @@ function updateQualityCard(e, locatedIndex) {
   var newText = globalArray[locatedIndex]['qualityArray'][(qualityIndex)]
  qualityText.innerHTML = `Quality: ${newText}`
 
-}
+};
 
 function locateId(e) {
   var parent = e.target.closest('article');
@@ -193,3 +195,13 @@ function pageReload() {
   }
 };
 
+function searchIdeas() {
+  var search = searchInput.value;
+  bottomContainer.innerHTML = "";
+  searchArray = globalArray.filter(function(idea){
+      return idea.title.includes(search) || idea.body.includes(search)
+  })
+  searchArray.map(function(idea){
+    generateCard(idea)
+  })
+};
