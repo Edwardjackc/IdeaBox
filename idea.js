@@ -6,12 +6,12 @@ class Idea {
     this.star = obj.star;
     this.quality = obj.quality || 0;
     this.qualityArray = ['Swill', 'Plausible', 'Genius']
-  }
+  };
 
   saveToStorage() {
     var stringified = JSON.stringify(globalArray);
     localStorage.setItem('ideaArr', stringified);
-  }
+  };
 
   deleteFromStorage(locatedId) {
     var newGlobalArray = globalArray.filter(function(idea) {
@@ -21,7 +21,7 @@ class Idea {
   globalArray = newGlobalArray;
   var stringified = JSON.stringify(globalArray);
   localStorage.setItem('ideaArr', stringified);
-  }
+  };
 
   updateIdea(title, body, star) {
  this.title = title;
@@ -29,11 +29,11 @@ class Idea {
  this.star = star;
  var stringified = JSON.stringify(globalArray);
  localStorage.setItem('ideaArr', stringified);
-}
+};
   
   updateQuality(qualityValue) {
  this.quality = qualityValue;
  var stringified = JSON.stringify(globalArray);
  localStorage.setItem('ideaArr', stringified);
   }
-}
+};
