@@ -6,7 +6,8 @@ var bottomContainer = document.querySelector('#bottom__container');
 var displayMessage = document.querySelector('#bottom__display--message');
 var searchInput = document.querySelector('.top__input--search');
 var asideList = document.querySelector('.aside__ul--list');
-var asideBtn = document.querySelector('.aside__input--btn');
+var asideStarBtn = document.querySelector('.aside__input--btn');
+// var asideTestBtn = document.querySelector('.aside__test--btn')
 //event listeners
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
@@ -19,8 +20,8 @@ bottomContainer.addEventListener('keyup', returnHandler);
 bottomContainer.addEventListener('click', upvoteQuality);
 bottomContainer.addEventListener('click', downvoteQuality);
 asideList.addEventListener('click', filterQualityHandler);
-asideBtn.addEventListener('click', toggleStarList);
-
+asideStarBtn.addEventListener('click', toggleStarList);
+asideTestBtn.addEventListener('click', testSearchIdeas);
 this.addEventListener('load', pageReload);
 
 //Global var
@@ -201,8 +202,9 @@ function pageReload() {
 
 function searchIdeas() {
     var search = searchInput.value;
+    var searchArray = domSearchIdeas();
     bottomContainer.innerHTML = "";
-    searchArray = globalArray.filter(function(idea){
+    searchArray = searchArray.filter(function(idea){
         return idea.title.includes(search) || idea.body.includes(search)
     });
     searchArray.map(function(idea){
@@ -257,3 +259,14 @@ function filterStarred() {
   generateCard(idea)
   });
 }
+
+function domSearchIdeas() {
+nodeArray = document.querySelectorAll('article');
+articleArray = Array.from(nodeArray);
+idArray = articleArray.map(function(article) {
+  return parseInt(article.dataset.id)})
+searchArray = globalArray.filter(function(idea) {
+  return idArray.includes(idea.id)
+});
+return searchArray;
+};
