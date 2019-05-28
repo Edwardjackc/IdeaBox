@@ -195,20 +195,19 @@ function pageReload() {
       return newIdea;
     });
     globalArray = newArray;
-    console.log(newArray)
     clearDisplayMessage();
   };
 };
 
 function searchIdeas() {
-  var search = searchInput.value;
-  bottomContainer.innerHTML = "";
-  searchArray = globalArray.filter(function(idea){
-      return idea.title.includes(search) || idea.body.includes(search)
-  });
-  searchArray.map(function(idea){
-    generateCard(idea)
-  });
+    var search = searchInput.value;
+    bottomContainer.innerHTML = "";
+    searchArray = globalArray.filter(function(idea){
+        return idea.title.includes(search) || idea.body.includes(search)
+    });
+    searchArray.map(function(idea){
+      generateCard(idea)
+    });
 };
 
 function filterQualityHandler(e) {
@@ -247,7 +246,7 @@ if(asideBtn.value === 'Show Starred Ideas') {
   bottomContainer.innerHTML = "";
   pageReload();
 }
-}
+};
 
 function filterStarred() {
   bottomContainer.innerHTML = "";
