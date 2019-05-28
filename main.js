@@ -201,15 +201,16 @@ function pageReload() {
 };
 
 function searchIdeas() {
-    var search = searchInput.value;
+    var search = searchInput.value.toLowerCase();
     var searchArray = domSearchIdeas();
     bottomContainer.innerHTML = "";
     searchArray = searchArray.filter(function(idea){
-        return idea.title.includes(search) || idea.body.includes(search)
-    });
+      return idea.title.toLowerCase().includes(search) || idea.body.toLowerCase().includes(search)});
     searchArray.map(function(idea){
-      generateCard(idea)
-    });
+      generateCard(idea)});
+    if(searchInput.value === "") {
+      pageReload();
+    }
 };
 
 function filterQualityHandler(e) {
