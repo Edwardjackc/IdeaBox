@@ -6,6 +6,7 @@ var bottomContainer = document.querySelector('#bottom__container');
 var displayMessage = document.querySelector('#bottom__display--message');
 var searchInput = document.querySelector('.top__input--search');
 var asideList = document.querySelector('.aside__ul--list');
+var asideBtn = document.querySelector('.aside__input--btn');
 //event listeners
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
@@ -18,6 +19,7 @@ bottomContainer.addEventListener('keyup', returnHandler);
 bottomContainer.addEventListener('click', upvoteQuality);
 bottomContainer.addEventListener('click', downvoteQuality);
 asideList.addEventListener('click', filterQualityHandler);
+asideBtn.addEventListener('click', toggleStarList);
 
 this.addEventListener('load', pageReload);
 
@@ -165,7 +167,7 @@ function validateQuality(locatedIndex, qualityValue) {
 function updateQualityCard(e, locatedIndex) {
   var qualityText = e.target.closest('article').querySelector('.bottom__span--card');
   var qualityIndex = globalArray[locatedIndex].quality
-  var newText = globalArray[locatedIndex]['qualityArray'][(qualityIndex)]
+  var newText = globalArray[locatedIndex]['qualityArray'][qualityIndex]
   qualityText.innerHTML = `Quality: ${newText}`
 
 };
@@ -193,20 +195,19 @@ function pageReload() {
       return newIdea;
     });
     globalArray = newArray;
-    console.log(newArray)
     clearDisplayMessage();
   };
 };
 
 function searchIdeas() {
-  var search = searchInput.value;
-  bottomContainer.innerHTML = "";
-  searchArray = globalArray.filter(function(idea){
-      return idea.title.includes(search) || idea.body.includes(search)
-  });
-  searchArray.map(function(idea){
-    generateCard(idea)
-  });
+    var search = searchInput.value;
+    bottomContainer.innerHTML = "";
+    searchArray = globalArray.filter(function(idea){
+        return idea.title.includes(search) || idea.body.includes(search)
+    });
+    searchArray.map(function(idea){
+      generateCard(idea)
+    });
 };
 
 function filterQualityHandler(e) {
@@ -230,3 +231,29 @@ function filterQuality(qualityIndex) {
   generateCard(idea)
   });
 };
+
+function toggleStarList(e) {
+  asideBtn = e.target;
+  toggleStarred(asideBtn);
+}
+
+function toggleStarred(asideBtn){
+if(asideBtn.value === 'Show Starred Ideas') {
+  asideBtn.value = 'View All Ideas';
+  filterStarred();
+} else if(asideBtn.value === 'View All Ideas') {
+  asideBtn.value = 'Show Starred Ideas';
+  bottomContainer.innerHTML = "";
+  pageReload();
+}
+};
+
+function filterStarred() {
+  bottomContainer.innerHTML = "";
+  starArray = globalArray.filter(function(idea){
+    return idea.star === true;
+  });
+  starArray.map(function(idea){
+  generateCard(idea)
+  });
+}
