@@ -21,7 +21,7 @@ bottomContainer.addEventListener('click', upvoteQuality);
 bottomContainer.addEventListener('click', downvoteQuality);
 asideList.addEventListener('click', filterQualityHandler);
 asideStarBtn.addEventListener('click', toggleStarList);
-asideTestBtn.addEventListener('click', testSearchIdeas);
+// asideTestBtn.addEventListener('click', testSearchIdeas);
 this.addEventListener('load', pageReload);
 
 //Global var
