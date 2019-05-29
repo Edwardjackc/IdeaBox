@@ -67,6 +67,15 @@ body{
   height:40px;
   padding:5px;
 }
+.top__input--sort {
+  background:#1f1f3d;
+  border:1px solid #1f1f3d;
+  color:#ffffff;
+  padding:5px;
+  height:40px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
 
 /********* bottom *************/
 .bottom__container {

@@ -7,7 +7,7 @@ var displayMessage = document.querySelector('#bottom__display--message');
 var searchInput = document.querySelector('.top__input--search');
 var asideList = document.querySelector('.aside__ul--list');
 var asideStarBtn = document.querySelector('.aside__input--btn');
-// var asideTestBtn = document.querySelector('.aside__test--btn')
+var recentIdeasBtn = document.querySelector('.top__input--sort')
 //event listeners
 titleInput.addEventListener('keypress',validate);
 bodyInput.addEventListener('keypress',validate);
@@ -21,8 +21,8 @@ bottomContainer.addEventListener('click', upvoteQuality);
 bottomContainer.addEventListener('click', downvoteQuality);
 asideList.addEventListener('click', filterQualityHandler);
 asideStarBtn.addEventListener('click', toggleStarList);
-// asideTestBtn.addEventListener('click', testSearchIdeas);
-this.addEventListener('load', pageReload);
+recentIdeasBtn.addEventListener('click', toggleIdeaList);
+this.addEventListener('load', reinstantiateIdeas);
 
 //Global var
 var globalArray = JSON.parse(localStorage.getItem('ideaArr')) || [];
@@ -170,7 +170,6 @@ function updateQualityCard(e, locatedIndex) {
   var qualityIndex = globalArray[locatedIndex].quality
   var newText = globalArray[locatedIndex]['qualityArray'][qualityIndex]
   qualityText.innerHTML = `Quality: ${newText}`
-
 };
 
 function locateId(e) {
@@ -180,24 +179,46 @@ function locateId(e) {
 };
 
 function locateIndex(e) {
-  var parent = e.target.closest('article');
-  var parentId = parseInt(parent.dataset.id);
-  var locatedIndex = globalArray.findIndex(function (idea) {
-    return idea.id === parentId
-  });
-  return locatedIndex;
+    var parent = e.target.closest('article');
+    var parentId = parseInt(parent.dataset.id);
+    var locatedIndex = globalArray.findIndex(function (idea) {
+      return idea.id === parentId
+    });
+    return locatedIndex;
+};
+
+function reinstantiateIdeas() {
+  if (globalArray.length !== 0) {
+    const newArray = globalArray.map(ideaObj => {
+    const newIdea = new Idea({ ...ideaObj});
+      return newIdea;
+    });
+    globalArray = newArray;
+    pageReload();
+  };
 };
 
 function pageReload() {
   if (globalArray.length !== 0) {
-    const newArray = globalArray.map(ideaObj => {
-    const newIdea = new Idea({ ...ideaObj});
-      generateCard(newIdea);
-      return newIdea;
-    });
-    globalArray = newArray;
+    ideaIndexes = findNewIdeas();
+    globalArray.slice((ideaIndexes[0]), (ideaIndexes[1])).map(ideaObj => {
+    generateCard(ideaObj)});
+    asideStarBtn.value = 'Show Starred Ideas';
+    recentIdeasBtn.value = 'Show More';
     clearDisplayMessage();
   };
+};
+
+function findNewIdeas(){
+  if (globalArray.length > 10 ) {
+    var end = globalArray.length;
+    var begin = end - 10;
+  } else {
+    var end = 10;
+    var begin = 0;
+  }
+var slice = [begin, end];
+return slice;
 };
 
 function searchIdeas() {
@@ -210,7 +231,7 @@ function searchIdeas() {
       generateCard(idea)});
     if(searchInput.value === "") {
       pageReload();
-    }
+    };
 };
 
 function filterQualityHandler(e) {
@@ -226,19 +247,18 @@ function filterQualityHandler(e) {
 };
 
 function filterQuality(qualityIndex) {
+  recentIdeasBtn.value === 'Show More'
   bottomContainer.innerHTML = "";
   qualityArray = globalArray.filter(function(idea){
-    return idea.quality === (qualityIndex)
-  });
+    return idea.quality === (qualityIndex)});
   qualityArray.map(function(idea){
-  generateCard(idea)
-  });
+  generateCard(idea)});
 };
 
 function toggleStarList(e) {
   asideBtn = e.target;
   toggleStarred(asideBtn);
-}
+};
 
 function toggleStarred(asideBtn){
 if(asideBtn.value === 'Show Starred Ideas') {
@@ -248,26 +268,56 @@ if(asideBtn.value === 'Show Starred Ideas') {
   asideBtn.value = 'Show Starred Ideas';
   bottomContainer.innerHTML = "";
   pageReload();
-}
+  };
 };
 
 function filterStarred() {
   bottomContainer.innerHTML = "";
   starArray = globalArray.filter(function(idea){
-    return idea.star === true;
-  });
+    return idea.star === true });
+  if(starArray.length === 0) {
+    displayStarMessage();
+  } else {
   starArray.map(function(idea){
-  generateCard(idea)
-  });
-}
+  generateCard(idea)});
+  };
+};
+
+function displayStarMessage() {
+  bottomContainer.insertAdjacentHTML('afterbegin', `<label class="bottom__display--message" id="bottom__display--message"type="">Star some ideas to see them displayed here!</label> `)
+};
 
 function domSearchIdeas() {
-nodeArray = document.querySelectorAll('article');
-articleArray = Array.from(nodeArray);
-idArray = articleArray.map(function(article) {
-  return parseInt(article.dataset.id)})
-searchArray = globalArray.filter(function(idea) {
-  return idArray.includes(idea.id)
-});
+var nodeArray = document.querySelectorAll('article');
+var articleArray = Array.from(nodeArray);
+var idArray = articleArray.map(function(article) {
+  return parseInt(article.dataset.id)});
+var searchArray = globalArray.filter(function(idea) {
+  return idArray.includes(idea.id)});
 return searchArray;
+};
+
+function toggleIdeaList(e) {
+  var recentIdeasBtn = e.target;
+  toggleRecentIdeas(recentIdeasBtn);
+};
+
+function toggleRecentIdeas(recentIdeasBtn){
+if(recentIdeasBtn.value === 'Show More') {
+  recentIdeasBtn.value = 'Show Less';
+  loadAll();
+} else if(recentIdeasBtn.value === 'Show Less') {
+  recentIdeasBtn.value = 'Show More';
+  bottomContainer.innerHTML = "";
+  asideStarBtn.value = 'Show Starred Ideas';
+  pageReload();
+  };
+};
+
+function loadAll() {
+   bottomContainer.innerHTML = "";
+    globalArray.map(ideaObj => {;
+      generateCard(ideaObj);
+    });
+    asideStarBtn.value = 'Show Starred Ideas';
 };
