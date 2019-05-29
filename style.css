@@ -158,7 +158,7 @@ ul {
   margin-left:-2.5rem;
 }
 
-.aside__hidden-menu {
+.aside__label--hidden-menu {
   display: none;
 }
 
@@ -260,7 +260,7 @@ ul {
     grid-template-areas: unset;
   }
 
-  .aside__hidden-menu {
+  .aside__label--hidden-menu {
     display: inherit;
     display: inline-block;
     margin-right: 100px;
