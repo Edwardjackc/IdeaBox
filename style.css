@@ -80,6 +80,7 @@ body{
   padding:25px 15px;
   display: flex;
   flex-wrap: wrap;
+  min-height:141%;
 }
 
 .bottom__display--message {
