@@ -72,13 +72,16 @@ function instantiateIdea() {
     star: false,
     quality: 0
   })
+  setupNewPage(idea)
+}
+
+function setupNewPage() {
   generateCard(idea);
   clearDisplayMessage();
   globalArray.push(idea)
   idea.saveToStorage(globalArray)
   clearForm(topForm);
   validateInputs(saveBtn,bodyInput)
-  console.log(idea);
 };
 
 function deleteCard(e) {
