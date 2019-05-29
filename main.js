@@ -228,11 +228,9 @@ function filterQualityHandler(e) {
 function filterQuality(qualityIndex) {
   bottomContainer.innerHTML = "";
   qualityArray = globalArray.filter(function(idea){
-    return idea.quality === (qualityIndex)
-  });
+    return idea.quality === (qualityIndex)});
   qualityArray.map(function(idea){
-  generateCard(idea)
-  });
+  generateCard(idea)});
 };
 
 function toggleStarList(e) {
@@ -254,20 +252,25 @@ if(asideBtn.value === 'Show Starred Ideas') {
 function filterStarred() {
   bottomContainer.innerHTML = "";
   starArray = globalArray.filter(function(idea){
-    return idea.star === true;
-  });
+    return idea.star === true });
+  if(starArray.length === 0) {
+    displayStarMessage();
+  } else {
   starArray.map(function(idea){
-  generateCard(idea)
-  });
+  generateCard(idea)});
+  }
+}
+
+function displayStarMessage() {
+  bottomContainer.insertAdjacentHTML('afterbegin', `<label class="bottom__display--message" id="bottom__display--message"type="">Star some ideas to see them displayed here!</label> `)
 }
 
 function domSearchIdeas() {
 nodeArray = document.querySelectorAll('article');
 articleArray = Array.from(nodeArray);
 idArray = articleArray.map(function(article) {
-  return parseInt(article.dataset.id)})
+  return parseInt(article.dataset.id)});
 searchArray = globalArray.filter(function(idea) {
-  return idArray.includes(idea.id)
-});
+  return idArray.includes(idea.id)});
 return searchArray;
 };
