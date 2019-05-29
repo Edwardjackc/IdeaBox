@@ -30,11 +30,10 @@ console.log('before', globalArray);
 
 function validate() {
   validateInputs(saveBtn,titleInput.value && bodyInput.value)
-  // validateInputs(saveBtn,bodyInput.value)
 };
 
 function validateInputs(button,input) {
-  button.disabled = !input //? false : true
+  button.disabled = input.length > 0 ? false : true
 };
 
 function clearForm(form) {
@@ -75,7 +74,7 @@ function instantiateIdea() {
   setupNewPage(idea)
 }
 
-function setupNewPage() {
+function setupNewPage(idea) {
   generateCard(idea);
   clearDisplayMessage();
   globalArray.push(idea)
