@@ -200,15 +200,26 @@ function reinstantiateIdeas() {
 
 function pageReload() {
   if (globalArray.length !== 0) {
-    globalArray.slice(0, 10).map(ideaObj => {
-    generateCard(ideaObj);
-    });
+    ideaIndexes = findNewIdeas();
+    globalArray.slice((ideaIndexes[0]), (ideaIndexes[1])).map(ideaObj => {
+    generateCard(ideaObj)});
     asideStarBtn.value = 'Show Starred Ideas';
     recentIdeasBtn.value = 'Show More';
     clearDisplayMessage();
   };
 };
 
+function findNewIdeas(){
+  if (globalArray.length > 10 ) {
+    var end = globalArray.length;
+    var begin = end - 10;
+  } else {
+    var end = 10;
+    var begin = 0;
+  }
+var slice = [begin, end];
+return slice;
+};
 
 function searchIdeas() {
     var search = searchInput.value.toLowerCase();
