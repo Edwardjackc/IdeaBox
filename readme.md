@@ -19,3 +19,4 @@ different approahes to the layout in order to get the over page styling where we
 ![screenshot](images/screenshot.png)
 ![mobile screenshot](images/mobileview.png)
 ![comp screen shot](images/ideabox-redux-comp.jpg)
+![mobile screen shot](images/ideabox-redux-comp2.jpg)
