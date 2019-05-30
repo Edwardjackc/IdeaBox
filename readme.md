@@ -15,3 +15,4 @@ leveraged BEM principles to easily organize our HTML/CSS.
 ## Overall Struggles:
 I think we had some issues with the styling of the page and keeping everything responsive. We had tried experimenting with 
 different approahes to the layout in order to get the over page styling where we needed. 
+
