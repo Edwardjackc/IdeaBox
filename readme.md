@@ -16,7 +16,7 @@ leveraged BEM principles to easily organize our HTML/CSS.
 I think we had some issues with the styling of the page and keeping everything responsive. We had tried experimenting with 
 different approahes to the layout in order to get the over page styling where we needed. 
 
-[link to IdeaBox](https://edwardjackc.github.io/IdeaBox/)
+[link to our IdeaBox webpage](https://edwardjackc.github.io/IdeaBox/)
 
 ![screenshot](images/screenshot.png)
 ![mobile screenshot](images/mobileview.png)
