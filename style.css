@@ -236,8 +236,12 @@ li:hover {
     font-size: .6em;
   }
 
+  .aside__input {
+    font-size: .6em;
+  }
+
   .bottom__display--message {
-    font-size: 1.0em;
+    font-size: .6em;
   }
 
   .bottom__article--card {
