@@ -163,9 +163,10 @@ ul {
   margin-left:-2.5rem;
 }
 
-/* ul:hover {
-  background-color:#f58e72;
-} */
+li:hover {
+  background-color: #D14119;
+  border-left: 4px #F58E72 solid;
+}
 
 .aside__hidden-menu {
   display: none;
