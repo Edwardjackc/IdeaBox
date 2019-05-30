@@ -159,7 +159,13 @@ ul {
   margin-left:-2.5rem;
 }
 
-.aside__label--hidden-menu {
+
+li:hover {
+  background-color: #D14119;
+  border-left: 4px #F58E72 solid;
+}
+
+.aside__hidden-menu {
   display: none;
 }
 
