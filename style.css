@@ -1,12 +1,11 @@
 * {
   box-sizing: border-box;
-  /* border: 1px red solid; */
 }
 
 body{
+  display:grid;
   font-family: 'Open Sans', sans-serif;
   height:100vh;
-  display:grid;
   grid-template-columns: 20% 80%;
   grid-template-rows:40% 60%;
   place-content:stretch;
@@ -17,21 +16,20 @@ body{
 
 /****************** top **************** **/
 
-
 .top__container {
-  grid-area: top;
   background:#A9aad2;
   display:flex;
+  grid-area: top;
   justify-content: center;
   padding:20px;
 }
 
 .top__form {
-  width:55%;
-  height: 100%;
   display:flex;
-  justify-content: space-around;
   flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+  width:55%;
 }
 
 .top__labels {
@@ -40,9 +38,9 @@ body{
 
 .top__input {
   border:#1f1f3d 1px solid;
+  height:38px;
   padding:5px;
   width:100%;
-  height:38px;
 }
 
 .top__input--body { 
@@ -53,34 +51,35 @@ body{
   background:#1f1f3d;
   border:1px solid #1f1f3d;
   color:#ffffff;
-  padding:5px;
   height:40px;
-  margin-top: 15px;
   margin-bottom: 10px;
+  margin-top: 15px;
+  padding:5px;
 }
 
 .top__input--search {
   height:40px;
   padding:5px;
 }
+
 .top__input--sort {
   background:#1f1f3d;
   border:1px solid #1f1f3d;
   color:#ffffff;
-  padding:5px;
   height:40px;
-  margin-top: 15px;
   margin-bottom: 10px;
+  margin-top: 15px;
+  padding:5px;
 }
 
 /********* bottom *************/
 .bottom__container {
-  grid-area:bottom;
   background:#eaeaf4;
-  padding:25px 15px;
   display: flex;
   flex-wrap: wrap;
+  grid-area:bottom;
   min-height:141%;
+  padding:25px 15px;
 }
 
 .bottom__display--message {
@@ -98,23 +97,23 @@ body{
 }
 
 .bottom__article--card { 
-  width:30%;
-  height:350px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  border-top:solid 2px #1f1f3d;
   border-left:solid 2px #1f1f3d;
   border-right:solid 2px #1f1f3d; 
-  margin-right: 20px;
+  border-top:solid 2px #1f1f3d;
+  display: flex;
+  flex-direction: column;
+  height:350px;
+  justify-content: space-between;
   margin-bottom: 20px;
+  margin-right: 20px;
+  width:30%;
 }
 
 .bottom__header--card { 
   background-color:#1f1f3d;
   display:flex;
-  justify-content: space-between;
   height:10%;
+  justify-content: space-between;
 }
 
 .bottom__icon--card {
@@ -128,23 +127,23 @@ body{
 }
 
 .bottom__section--card {
-  padding: 10px;
-  font-weight:300;
-  font-size: 1.5em;
   background-color: #ffffff;
+  font-size: 1.5em;
+  font-weight:300;
   height: 80%;
   overflow: break-word;
+  padding: 10px;
 }
 
 .bottom__footer--card { 
-  background-color:#5356a4;
-  height:10%;
-  border-bottom:solid 1px #5356a3;
-  display:flex;
-  justify-content: space-between;
   align-items: center;
+  background-color:#5356a4;
+  border-bottom:solid 1px #5356a3;
   color:#ffffff;
+  display:flex;
   font-weight:bold;
+  height:10%;
+  justify-content: space-between;
 }
 
 /***************************** aside *************************/
@@ -159,13 +158,12 @@ ul {
   margin-left:-2.5rem;
 }
 
-
 li:hover {
   background-color: #D14119;
   border-left: 4px #F58E72 solid;
 }
 
-.aside__hidden-menu {
+.aside__label--hidden-menu {
   display: none;
 }
 
@@ -187,8 +185,8 @@ li:hover {
 }
 
 .aside__section--top { 
-  border-top:1px solid #353567;
   border-bottom:1px solid #353567;
+  border-top:1px solid #353567;
   height:150px;
   justify-content: space-evenly;
 }
@@ -200,13 +198,13 @@ li:hover {
 }
 
 .aside__input {
-  display:flex;
-  justify-content: center;
   background-color:#5356A4;
-  color:#e9e9f3;
   border:1px solid #5356A4;
-  height:50px;
+  color:#e9e9f3;
+  display:flex;
   font-size:.99em;
+  height:50px;
+  justify-content: center;
 }
 
 .aside__input--text {
@@ -215,27 +213,15 @@ li:hover {
 }
 
 .aside__list {  
-  list-style: none; 
+  align-items: flex-start;
   color:#ffffff;
   display:flex;
   flex-direction: column;
-  align-items: flex-start;
-  width:100%;
   font-size:1.1em;
   font-weight:300;
+  list-style: none; 
   margin-bottom:10px;
-}
-
-.aside__list--swill:hover{
-  background-color:#d14119;
-}
-
-.aside__list--plausible:hover{
-  background-color:#d14119;
-}
-
-.aside__list--genius:hover{
-  background-color:#d14119;
+  width:100%;
 }
 
 .aside__form { 
@@ -283,9 +269,9 @@ li:hover {
   }
 
   .bottom__article--card {
+    height: 250px;
     margin: 10px 0;
     width: 100%;
-    height: 250px;
   }
 
   .bottom__display--message {
